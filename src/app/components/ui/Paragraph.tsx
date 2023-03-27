@@ -28,11 +28,13 @@ const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
         ref={ref}
         {...props}
         className={cn(paragraphVariants({ size, className }))}
-      ></p>
+      >
+        {children}
+      </p>
     );
   }
 );
 
-Paragraph.displayName = "Paragraph";
+Paragraph.displayName = "Paragraph"; // do this because we're using a forwardRef
 
 export default Paragraph;
