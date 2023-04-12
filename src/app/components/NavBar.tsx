@@ -10,6 +10,34 @@ const NavBar = async ({}) => {
         <Link href="/" className={buttonVariants({ variants: "link" })}>
           Text Similarity 1.0
         </Link>
+
+        <div className="md:hidden">
+          <ThemeToggle />
+        </div>
+
+        <div className="hidden md:flex gap-4">
+          <ThemeToggle />
+          <Link
+            href="/documentation"
+            className={buttonVariants({ variants: "ghost" })}
+          >
+            Documentation
+          </Link>
+
+          {session ? (
+            <>
+              <Link
+                href="/dashboard"
+                className={buttonVariants({ variants: "ghost" })}
+              >
+                Dashboard
+              </Link>
+              <SignOutButton />
+            </>
+          ) : (
+            <SignInButton />
+          )}
+        </div>
       </div>
     </div>
   );
