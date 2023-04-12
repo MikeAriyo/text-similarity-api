@@ -17,7 +17,7 @@ const paragraphVariants = cva(
   }
 );
 
-interface ParagraphProps
+ interface ParagraphProps
   extends HTMLAttributes<HTMLParagraphElement>,
     VariantProps<typeof paragraphVariants> {}
 
