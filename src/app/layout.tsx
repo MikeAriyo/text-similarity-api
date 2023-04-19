@@ -20,7 +20,7 @@ export default function RootLayout({
         <Providers>
           {children}
 
-          {/* @ts-expect-error Server Component */}
+          {/* @ts-expect-error Server Component  ---- you cannot import a server component into a client component */}
           <NavBar />
         </Providers>
 
