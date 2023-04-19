@@ -1,7 +1,6 @@
-import { cva } from "class-variance-authority";
-import { FC } from "react";
-
-interface ButtonProps {}
+import { cn } from "@/lib/utils";
+import { cva, VariantProps } from "class-variance-authority";
+import { ButtonHTMLAttributes, FC, forwardRef } from "react";
 
 const buttonVariants = cva(
   "active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-medium transition-color focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 dark:ring-slate-400 disabled:pointer-events-none dark:focus:ring-offset-slate-900",
@@ -29,8 +28,19 @@ const buttonVariants = cva(
   }
 );
 
-const Button: FC<ButtonProps> = ({}) => {
-  return <div>Button</div>;
-};
+interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  isLoading?: boolean;
+}
+
+const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(({
+  className, children, variant, isLoading, size, ...props
+}, ref) => {
+  return (
+    <button className={cn(buttonVariants({variant, size, className}))} ref={ref} disabled={isLoading} {...props}></button>
+  ) 
+}
 
 export default Button;
+  
