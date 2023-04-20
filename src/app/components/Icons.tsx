@@ -7,3 +7,5 @@ export const Icons = {
   Moon,
   Laptop,
 };
+
+export default Icons;
