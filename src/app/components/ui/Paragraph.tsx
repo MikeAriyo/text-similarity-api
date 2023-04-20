@@ -3,21 +3,24 @@ import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "../../../lib/utils";
 
 const paragraphVariants = cva(
-  "max-w-prose text-slate-700 dark:text-slate-300 mb-2 text-center", //base styles
+  "max-w-prose text-slate-700 dark:text-slate-300 mb-2 text-center", // define your base styles here
   {
     variants: {
+      // begin to define each variants here as an object with key-value pairs for each stylings
       size: {
         default: "text-base sm:text-lg",
         sm: "text-sm sm:text-base",
       },
     },
+
+    // define the default variants here for each variant defined above
     defaultVariants: {
       size: "default",
     },
   }
 );
 
- interface ParagraphProps
+interface ParagraphProps
   extends HTMLAttributes<HTMLParagraphElement>,
     VariantProps<typeof paragraphVariants> {}
 
@@ -27,7 +30,8 @@ const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
       <p
         ref={ref}
         {...props}
-        className={cn(paragraphVariants({ size, className }))}
+        className={cn(paragraphVariants(
+          { size, className }))}
       >
         {children}
       </p>
