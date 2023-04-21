@@ -4,7 +4,7 @@ import * as React from "react";
 import { useTheme } from "next-themes";
 
 import { Icons } from "./Icons";
-import Button from "./ui/Button";
+import { Button } from "./ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
