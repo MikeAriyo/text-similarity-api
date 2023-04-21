@@ -1,18 +1,18 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { FC } from "react";
+
+import { buttonVariants } from "./ui/Button";
 import SignInButton from "./SignInButton";
 import SignOutButton from "./SignOutButton";
-import ThemeToggle from "./ThemeToggle";
-import { buttonVariants } from "./ui/Button";
-
-const NavBar = async () => {
+import { ThemeToggle } from "./ThemeToggle";
+const Navbar = async () => {
   const session = await getServerSession();
+
   return (
-    <div className="fixed backdrop-blur-sm bg-white/75 dark:bg-slate-900 z-50 top-0 left-0 right-0 h-20 border-b border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
-      <div className="container max-w-7xl mx-auto w-full justify-between items-center">
+    <div className="fixed backdrop-blur-sm bg-white/75 dark:bg-slate-900/75 z-50 top-0 left-0 right-0 h-20 border-b border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
+      <div className="container max-w-7xl mx-auto w-full flex justify-between items-center">
         <Link href="/" className={buttonVariants({ variant: "link" })}>
-          Text Similarity 1.0
+          Text Similarity v1.0
         </Link>
 
         <div className="md:hidden">
@@ -27,12 +27,11 @@ const NavBar = async () => {
           >
             Documentation
           </Link>
-
           {session ? (
             <>
               <Link
-                href="/dashboard"
                 className={buttonVariants({ variant: "ghost" })}
+                href="/dashboard"
               >
                 Dashboard
               </Link>
@@ -47,4 +46,4 @@ const NavBar = async () => {
   );
 };
 
-export default NavBar;
+export default Navbar;
