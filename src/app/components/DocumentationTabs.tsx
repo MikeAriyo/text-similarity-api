@@ -1,5 +1,7 @@
+import { nodejs, python } from "@/helpers/documentation-code";
 import { TabsContent } from "@radix-ui/react-tabs";
 import { FC } from "react";
+import Code from "../components/Code";
 import { Tabs, TabsList, TabsTrigger } from "./ui/Tabs";
 
 const DocumentationTabs: FC = ({}) => {
@@ -11,9 +13,11 @@ const DocumentationTabs: FC = ({}) => {
       </TabsList>
 
       <TabsContent value="nodejs">
-        <Code />
+        <Code animated language="javascript" code={nodejs} show />
       </TabsContent>
-      <TabsContent value="python"></TabsContent>
+      <TabsContent value="python">
+        <Code animated language="javascript" code={python} show />
+      </TabsContent>
     </Tabs>
   );
 };
