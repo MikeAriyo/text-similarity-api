@@ -14,6 +14,8 @@ function getGoogleCredentials() {
   if (!clientSecret || clientSecret.length === 0) {
     throw new Error("No clientSecret for google provider set");
   }
+
+  return { clientId, clientSecret };
 }
 
 export const authOptions: NextAuthOptions = {
@@ -26,8 +28,18 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: getGoogleCredentials().clientId,
+      clientSecret: getGoogleCredentials().clientSecret,
     }),
   ],
+  callbacks: {
+    async session({ token, session }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.image;
+      }
+    },
+  },
 };
