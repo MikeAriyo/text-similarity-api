@@ -38,3 +38,6 @@ const RequestApiKey: FC = ({}) => {
 };
 
 export default RequestApiKey;
+function createAoiKey() {
+  throw new Error("Function not implemented.");
+}
