@@ -3,6 +3,8 @@ import { db } from "./db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 
+//function to get google credentials - linked up with the environment
+// checks the env file for the google secrets and ID, throws an error if empty
 function getGoogleCredentials() {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
@@ -18,21 +20,25 @@ function getGoogleCredentials() {
   return { clientId, clientSecret };
 }
 
+// auth options - check next auth docs for clarification if necessary
+// configuring next auth options according to docs
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/login",
+    signIn: "/login", // authentication page
   },
   providers: [
+    // auth providers
     GoogleProvider({
       clientId: getGoogleCredentials().clientId,
       clientSecret: getGoogleCredentials().clientSecret,
     }),
   ],
   callbacks: {
+    // functions that creats connection to the prisma database
     async session({ token, session }) {
       if (token) {
         session.user.id = token.id;
@@ -62,7 +68,8 @@ export const authOptions: NextAuthOptions = {
         picture: dbUser.image,
       };
     },
+    redirect() {
+      return "/dashboard";
+    },
   },
 };
-
-// check nect-auth docs for further clarifications
